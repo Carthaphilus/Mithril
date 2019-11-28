@@ -1,0 +1,214 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19 nov. 2019, 09:11:10
+    Author     : FullCodex
+*/
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+/* Grandiant interessant
+    Harvey
+    JShine
+    Green and Blue
+*/
+
+/*body{
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    animation: Gradient 15s ease infinite;
+    color: white;
+}*/
+
+.connexion_enregistrement{
+    margin-top: 200px;
+}
+
+#logo_connexion{
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: Gradient 15s ease infinite;
+    font-family: Bungee;
+    font-size: 100px;
+    font-weight: bold;
+    position: relative;
+}
+
+#logo{
+    margin-left: 22px;
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: Gradient 15s ease infinite;
+    font-family: Bungee;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+}
+
+table{
+    width: 98%!important;
+}
+
+.entete{
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: Gradient 15s ease infinite;
+    font-weight: bold;
+}
+
+/*td{
+    padding-bottom: 96px!important;
+}*/
+
+i{
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: Gradient 15s ease infinite; 
+    font-size: 25px;
+}
+
+.dropdown-divider{
+    border-color: #a4a4a4;
+}
+
+.logo_superpose{
+    text-align: initial !important;
+    margin: 9px;
+
+}
+
+.reglage{
+    margin-left: 15px !important;
+    margin-top: 14px;
+    font-size: 18px;
+}
+
+.logo_superpose .first{
+    position: relative;
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important;
+    animation: Gradient 15s ease infinite; 
+}
+
+.inter{
+    background: white;
+    position: absolute;
+}
+
+.logo_superpose .second{
+    position: absolute;
+    margin-left: 9px;
+    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important;
+    animation: Gradient 15s ease infinite; 
+}
+
+.switch_calendrier{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.calendar-event{
+    margin-left: 0px !important;
+}
+
+.star{
+    font-size: 10px;
+    margin-top: 12px;
+    margin-left: 5.5px;
+    
+    background: #FFF !important;
+    background-size: 400% 400% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: Gradient 15s ease infinite; 
+    
+}
+
+#nav-end{
+    margin-top: 700px;
+    position: fixed;
+}
+
+.input-group-text{
+    width: 50px;
+}
+
+.imodal{
+    font-size: 20px;
+}
+
+.button-gradiant {
+  border-radius: 1rem;
+  font-size: 1rem;
+  padding: .3rem 1rem;
+  color: black;
+  border: solid 3px transparent;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(-45deg, #C33764, #1D2671);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #fff inset;
+  animation: Gradient 15s ease infinite; 
+}
+
+.button-gradiant:hover {
+  box-shadow: none;
+  color: white;
+}
+
+.button-gradiant:hover > i{
+    background: #FFF;
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent !important;
+    animation: Gradient 15s ease infinite; 
+}
+
+.table_initial td{
+    padding-bottom: 0.75rem !important;
+}
+
+
+/*.agenda{
+    font-size: 10px;
+}*/
+
+/* ELEMENT DE WEBSITE A ENLEVER */
+#navigation{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    visibility: hidden;
+}
+
+#webslides-zoomed{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    visibility: hidden;
+}
