@@ -3,58 +3,32 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    {% dump(tabEvenement) %}
     <main role="main">
         <div class="row text-center">
             <table class="table">
-                {% set start = Date.getPremierJour()|date_modify('last monday') %}
-                {% for index,numWeek in 1..Date.getWeeks() %}
-                    <tr>
-                        {% for days in Date.getDays() %}
-                            {% set day = start|date_modify("+"~(loop.index0+ index * 7)~" days")|date("d") %}
-                            {% dump(day) %}
-                            <td>
-                                {% if index == 0 %}
-                                    <div class="entete">
-                                        {{ days }}
-                                    </div><br>
-                                {% endif %}
-                                <a href="#modalJour{{ loop.index0+ index * 7 }}" data-toggle="modal">{{ day }}</a><br>
-                                {% if agendaSpe is not empty %}
-                                    {% for agenda in AllAgenda %}
-                                        {% if agenda.id|number_format == agendaSpe %}
-                                            {% set agendaSpe = agenda %}
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% for evenement in agendaSpe.getEvenement %}
-                                        {% if Date.getJours[loop.index0+ index * 7] is defined %}
-                                            {% if Date.getJours[loop.index0+ index * 7]|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and  Date.getJours[loop.index0+ index * 7]|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
-                                                <div style="background: {{evenement.couleur}}">
-                                                    {{ evenement.libelle }}
-                                                </div>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% else %}
-                                    {% for agenda in AllAgenda %}                                    
-                                        {% for evenement in agenda.getEvenement %}
-                                            {#{% if Date.getJours[loop.index0+ index * 7] is defined %}#}
-                                                {% if Date.getJours[loop.index0+ index * 7]|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and  Date.getJours[loop.index0+ index * 7]|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
-                                                    <div style="background: {{evenement.couleur}}">
-                                                        {{ evenement.libelle }}
-                                                    </div>
-
-                                        
-                                                {% endif %}
-                                            {#{% endif %}#}
-                                        {% endfor %}
-                                    {% endfor %}
-                                {% endif %}
-
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
+                {% for day in Date.getJours %}
+                    {% if (loop.index0 % 7) == 0 %}
+                        <tr>
+                        {% endif %}
+                        <td>
+                            {% if loop.index0 < 7 %}
+                                <div class="entete">
+                                    {{ Date.days[day|date('l')] }}<br>
+                                </div>
+                            {% endif %}
+                            {{ day|date('d') }}<br>
+{#                            {% dump(day) %}#}
+                            {% for agenda in AllAgenda %}                                    
+                                {% for evenement in agenda.getEvenement %}
+                                    {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
+                                        <div style="background: {{evenement.couleur}}">
+                                            {{ evenement.libelle }}<br>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
             </table>
         </div>
     </main>
