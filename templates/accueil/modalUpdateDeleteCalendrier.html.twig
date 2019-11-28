@@ -54,7 +54,7 @@
                                 <input list="userDroit" class="form-control" name="userDroit" type="text" id="addUSer" placeholder="Qui a acces a cette agenda ?">
                                 <datalist id="userDroit">
                                     {% for user in AllUsers %}
-                                        <option data-value="{{ user.id }}" value="{{ user.mail }}">
+                                        <option data-value="{{ user.mail }}" value="{{ user.id }}">
                                     {% endfor %}
                                 </datalist>
                             </div>
