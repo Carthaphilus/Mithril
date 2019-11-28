@@ -63,20 +63,19 @@
                     {% for day in Date.getJours %} 
                         <td>
                             {{ day|date('d') }}
-
                             {% for key,agenda in AllAgenda %}                                    
                                 {% for evenement in agenda.getEvenement %}
                                     {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
                                         {% if key > 0 %}
-                                        {% elseif evenement != oldEvenement %}
+                                        {% elseif evenement.libelle != oldEvenement %}
                                             <tr>
                                                 <td>
                                         {% endif %}
                                         <div style="background: {{evenement.couleur}}">
                                             {{ evenement.libelle }}<br>
                                         </div>
+                                        {% set oldEvenement = evenement.libelle %}
                                     {% endif %}
-                                    {% set oldEvenement = evenement %}
                                 {% endfor %}
                             {% endfor %}
                         </td>
