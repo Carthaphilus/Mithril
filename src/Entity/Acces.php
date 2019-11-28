@@ -24,7 +24,7 @@ class Acces
     private $User;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Agenda", mappedBy="acces")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agenda", inversedBy="acces", fetch="EAGER")
      */
     private $Agenda;
 
@@ -55,37 +55,14 @@ class Acces
         return $this;
     }
 
-    /**
-     * @return Collection|Agenda[]
-     */
-    public function getAgenda(): Collection
-    {
+    function getAgenda() {
         return $this->Agenda;
     }
 
-    public function addAgenda(Agenda $agenda): self
-    {
-        if (!$this->Agenda->contains($agenda)) {
-            $this->Agenda[] = $agenda;
-            $agenda->setAcces($this);
-        }
-
-        return $this;
+    function setAgenda($Agenda) {
+        $this->Agenda = $Agenda;
     }
-
-    public function removeAgenda(Agenda $agenda): self
-    {
-        if ($this->Agenda->contains($agenda)) {
-            $this->Agenda->removeElement($agenda);
-            // set the owning side to null (unless already changed)
-            if ($agenda->getAcces() === $this) {
-                $agenda->setAcces(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getDroit(): ?bool
     {
         return $this->Droit;

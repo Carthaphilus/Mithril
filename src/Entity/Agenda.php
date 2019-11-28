@@ -41,7 +41,7 @@ class Agenda
     private $evenement;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Acces", inversedBy="Agenda", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\Acces", mappedBy="Agenda")
      */
     private $acces;
 
@@ -127,15 +127,12 @@ class Agenda
         return $this;
     }
 
-    public function getAcces(): ?Acces
-    {
+    function getAcces() {
         return $this->acces;
     }
 
-    public function setAcces(?Acces $acces): self
-    {
+    function setAcces($acces) {
         $this->acces = $acces;
-
-        return $this;
     }
+
 }
