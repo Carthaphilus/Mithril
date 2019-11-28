@@ -12,6 +12,7 @@
                     <tr>
                         {% for days in Date.getDays() %}
                             {% set day = start|date_modify("+"~(loop.index0+ index * 7)~" days")|date("d") %}
+                            {% dump(day) %}
                             <td>
                                 {% if index == 0 %}
                                     <div class="entete">
@@ -37,15 +38,15 @@
                                 {% else %}
                                     {% for agenda in AllAgenda %}                                    
                                         {% for evenement in agenda.getEvenement %}
-                                            {% if Date.getJours[loop.index0+ index * 7] is defined %}
+                                            {#{% if Date.getJours[loop.index0+ index * 7] is defined %}#}
                                                 {% if Date.getJours[loop.index0+ index * 7]|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and  Date.getJours[loop.index0+ index * 7]|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
                                                     <div style="background: {{evenement.couleur}}">
                                                         {{ evenement.libelle }}
                                                     </div>
 
-                                                    
+                                        
                                                 {% endif %}
-                                            {% endif %}
+                                            {#{% endif %}#}
                                         {% endfor %}
                                     {% endfor %}
                                 {% endif %}
