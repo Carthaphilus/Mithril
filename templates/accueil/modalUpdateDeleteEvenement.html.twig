@@ -58,7 +58,7 @@
                                                         <div class="input-group-append" {#data-target="#datetimepickerEvent{{ k }}Agenda{{key}}" data-toggle="datetimepicker"#}>
                                                             <i class=" input-group-text fa fa-calendar imodal"></i>
                                                         </div>
-                                                        <input type="date" class="form-control datetimepicker-input" value="{{ AllAgenda[index].getEvenement[k].dateDeb|date('d/m/Y H:i') }}" name="evenement[dateDeb]" {#data-target="#datetimepickerEvent{{ k }}Agenda{{key}}"#}/>
+                                                        <input type="date" class="form-control datetimepicker-input" value="{{ AllAgenda[index].getEvenement[k].dateDeb|date('Y-m-d') }}" name="evenement[dateDeb]" {#data-target="#datetimepickerEvent{{ k }}Agenda{{key}}"#}/>
                                                     </div>
                                                     {#<script>
                                                         $(function() {
@@ -75,7 +75,7 @@
                                                         <div class="input-group-append" {#data-target="#datetimepicker2Event{{ k }}Agenda{{key}}" data-toggle="datetimepicker"#}>
                                                             <i class=" input-group-text fa fa-calendar imodal"></i>
                                                         </div>
-                                                        <input type="date" class="form-control datetimepicker-input" value="{{ AllAgenda[index].getEvenement[k].dateFin|date('d/m/Y H:i') }}" name="evenement[dateFin]" {#data-target="#datetimepicker2Event{{ k }}Agenda{{key}}"#}/>
+                                                        <input type="date" class="form-control datetimepicker-input" value="{{ AllAgenda[index].getEvenement[k].dateFin|date('Y-m-d') }}" name="evenement[dateFin]" {#data-target="#datetimepicker2Event{{ k }}Agenda{{key}}"#}/>
                                                     </div>
                                                     {#<script>
                                                         $(function() {
