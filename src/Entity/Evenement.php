@@ -6,7 +6,7 @@ use App\Repository\EvenementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="EvenementRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
  */
 class Evenement
 {    
@@ -62,7 +62,11 @@ class Evenement
     {
         return $this->id;
     }
-
+    
+    function setId($id) {
+        $this->id = $id;
+    }
+    
     public function getLibelle(): ?string
     {
         return $this->libelle;
