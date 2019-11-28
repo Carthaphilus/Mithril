@@ -50,7 +50,7 @@ and open the template in the editor.
 }
 
 #logo{
-    margin-left: 22px;
+    margin-left: 25px;
     background: linear-gradient(-45deg, #C33764, #1D2671);
     background-size: 400% 400%;
     -webkit-background-clip: text;
@@ -133,11 +133,15 @@ i{
     margin-right: 15px;
 }
 
+.plus{
+    padding-right: 6px;
+}
+
 .calendar-event{
     margin-left: 0px !important;
 }
 
-.star{
+.star1{
     font-size: 10px;
     margin-top: 12px;
     margin-left: 5.5px;
@@ -148,6 +152,26 @@ i{
     -webkit-text-fill-color: transparent !important;
     animation: Gradient 15s ease infinite; 
     
+}
+
+.star2{
+    font-size: 10px;
+    position: fixed !important;
+    margin-top: 12px;
+    margin-left: 5.5px;
+    background: #FFF !important;
+    background-size: 400% 400% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: Gradient 15s ease infinite; 
+    
+}
+
+.third{
+    margin-left: 15px !important;
+    margin-top: 14px;
+    font-size: 18px;
+    position: relative;
 }
 
 #nav-end{
