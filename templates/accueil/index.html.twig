@@ -58,29 +58,44 @@
                     {% endif %}
             </table>
 
-            <table style="">
+            <table class="table table-sm" style="width: 90%">
                 <tr>
                     {% for day in Date.getJours %} 
                         <th>{{ day|date('d') }}</th>
                         {% endfor %}
                 </tr>
-                <tr>
-                    {% set oldevent = "" %}
-                    {% for day in Date.getJours %}                        
-                        {% for agenda in AllAgenda %}
-                            {% for evenement in agenda.getEvenement %}
-                                {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
-                                    {% if oldevent != evenement.libelle %}
-                                    <tr>
+                {% if agendaSpe is empty %}
+                    {% for agenda in AllAgenda %}
+                        {% for evenement in agenda.getEvenement %}
+                            <tr>
+                                {% for day in Date.getJours %} 
+                                    {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
+                                        <td style="background: {{evenement.couleur}}">{{evenement.libelle}}</td>
+                                    {% else %}
+                                        <td></td>
                                     {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    {% for agenda in AllAgenda %}
+                        {% if agendaSpe == agenda.id|number_format %}
+                            {% set agendaSpe = agenda %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for evenement in agendaSpe.getEvenement %}
+                        <tr>
+                            {% for day in Date.getJours %} 
+                                {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
                                     <td style="background: {{evenement.couleur}}">{{evenement.libelle}}</td>
                                 {% else %}
                                     <td></td>
                                 {% endif %}
-                                {% set oldevent = evenement.libelle %}
                             {% endfor %}
-                        {% endfor %}
+                        </tr>
                     {% endfor %}
+                {% endif %}
             </table>
         </div>
     </main>

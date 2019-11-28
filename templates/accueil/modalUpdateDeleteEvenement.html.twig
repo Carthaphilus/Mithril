@@ -18,7 +18,7 @@
                         {% set index = loop.index0 %}
                         {% for k,formEvent in agenda %}
 
-                            {% if AllAgenda[index].getEvenement[k] is not empty and  AllAgenda[index].getEvenement[k] is defined%}
+                            {% if AllAgenda[index].getEvenement is not empty and  AllAgenda[index].getEvenement is defined%}
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="row">
