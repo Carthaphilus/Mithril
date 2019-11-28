@@ -38,7 +38,9 @@ class AccueilController extends Controller {
             }
         }
         
-        dump($tabEvenement);
+        if(!isset($tabEvenement)){
+            $tabEvenement=array();
+        }
         
         $query2 = $bdd->createQuery('SELECT a FROM App\Entity\User a');
         $Users = $query2->getResult();
@@ -222,7 +224,7 @@ class AccueilController extends Controller {
     /**
      * @Route("/Update/Evenement",name="modifEvenement")
      */
-    public function updateEvenement(Request $request, EvenementRepository $repositoryEvenement) {
+    public function updateEvenement(Request $request, AgendaRepository $repositoryAgenda) {
         $Evenement = new Evenement();
         $formEvenement = $this->createForm(EvenementType::class, $Evenement);
         $formEvenement->handleRequest($request);
@@ -230,10 +232,10 @@ class AccueilController extends Controller {
         if ($formEvenement->isSubmitted() && $formEvenement->isValid()) {
 
             $evenement = $formEvenement->getData();
-
-            $Evenement2 = $repositoryEvenement->find($evenement->getId());
-            $evenement->setAgenda($Evenement2->getAgenda());
-
+            
+            $Agenda = $repositoryAgenda->find($evenement->getAgenda()->getId());
+            $evenement->setAgenda($Agenda);
+            
             $bdd = $this->getDoctrine()->getManager();
             $bdd->merge($evenement);
             $bdd->flush();
