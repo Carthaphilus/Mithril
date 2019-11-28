@@ -6,7 +6,7 @@
     <main role="main">
         <div class="row text-center">
             <table class="table">
-                                {% if agendaSpe is empty %}
+                {% if agendaSpe is empty %}
                     {% for day in Date.getJours %}
                         {% if (loop.index0 % 7) == 0 %}
                             <tr>
@@ -57,6 +57,31 @@
                         {% endfor %}
                     {% endif %}
             </table>
+
+            {#<table>
+                <tr>
+                    {% for day in Date.getJours %} 
+                        <td>
+                            {{ day|date('d') }}
+
+                            {% for key,agenda in AllAgenda %}                                    
+                                {% for evenement in agenda.getEvenement %}
+                                    {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
+                                        {% if key > 0 %}
+                                        {% elseif evenement != oldEvenement %}
+                                            <tr>
+                                                <td>
+                                        {% endif %}
+                                        <div style="background: {{evenement.couleur}}">
+                                            {{ evenement.libelle }}<br>
+                                        </div>
+                                    {% endif %}
+                                    {% set oldEvenement = evenement %}
+                                {% endfor %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+            </table>#}
         </div>
     </main>
 {% endblock %}
