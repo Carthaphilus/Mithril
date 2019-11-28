@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Agenda{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('Framework/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Framework/fontawesome/css/all.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Framework/moment/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
+            <link type="text/css" media="all" href="{{ asset('Framework/weslide/static/css/webslides.css') }}" rel="stylesheet">
+            <link type="text/css" media="all" href="{{ asset('Framework/weslide/static/css/svg-icons.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/importCSS.css') }}" rel="stylesheet">
+            <link rel="shortcut icon" href="logo.png" type="image/png" />
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% block sidebar %}  
+                <header>
+                    <div class="row">
+                        <nav class="d-none d-md-block bg-light sidebar">
+                            <a id='logo' class="navbar-brand" href="#">
+                                M
+                            </a>
+                            <div class="sidebar-sticky">
+
+                                <ul class="nav flex-column text-center mt-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#modalUpdateUser" data-toggle="modal"  data-toggle="popover" data-trigger="hover" data-content="Infos Utilisateur">
+                                            <i class="fas fa-user-circle"></i>
+                                        </a>
+
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="nav-item dropright">
+                                        <a id="dropdownDisplay" role="button" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-tv"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownDisplay">
+                                            <a class="dropdown-item" href="#">Chaque Mois</a>
+                                            <a class="dropdown-item" href="#">Affichage en Gantt</a>
+                                        </div>
+                                    </li>
+
+                                    <div class="dropdown-divider"></div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="collapse" href="#collapseAgenda" aria-expanded="false" aria-controls="collapseAgenda" 
+                                           data-toggle="popover" data-trigger="hover" data-content="Selection des agendas">
+                                            <div class="logo_superpose">
+                                                <i class="second reglage fas fa-cog"></i>
+                                                <i class="first far fa-calendar-alt"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <div class="collapse" id="collapseAgenda">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path("accueil") }}" data-toggle="popover" data-trigger="hover" data-content="Tout les agendas">
+                                                <div class="logo_superpose">
+                                                    <i class="second far fa-calendar-alt"></i>
+                                                    <i class="inter far fa-calendar-alt"></i>
+                                                    <i class="first far fa-calendar-alt"></i>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {% for agenda in AllAgenda %}
+                                        <li class="nav-item text-center">
+                                            <a class="nav-link" href="{{ path("accueil",{'year':Date.year,'month':Date.month,"agendaSpe":agenda.id}) }}" data-toggle="popover" data-trigger="hover" data-content="{{ agenda.nom }}">
+                                                <i class="first far fa-calendar-alt"></i>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#modalUpdateDeleteCalendrier" data-toggle="modal"
+                                               data-toggle="popover" data-trigger="hover" data-content="Gestions des agendas">
+                                                <i class="fas fa-cog"></i>
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#modalAddCalendrier" data-toggle="modal" 
+                                           data-toggle="popover" data-trigger="hover" data-content="Ajouter un agenda">
+                                            <i class="far fa-calendar-plus"></i>
+                                        </a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#modalAddEvenement" data-toggle="modal" 
+                                           data-toggle="popover" data-trigger="hover" data-content="Ajouter un evenement">
+                                            <div class="logo_superpose">
+                                                <i class="second calendar-event fas fa-calendar"></i>
+                                                <i class="first star fas fa-star"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <div id="nav-end">                                       
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path("app_logout") }}" data-toggle="popover" data-trigger="hover" data-content="Deconnexion">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-toggle="popover" data-trigger="hover" data-content="Paramètre">
+                                                <i class="fas fa-tools"></i>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-toggle="popover" data-trigger="hover" data-content="Tutoriel">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </li>
+                                    </div>                                
+                                </ul>
+                            </div>
+                        </nav>
+
+                    </div>
+                </header>
+            {%  endblock %}
+                {% block date %}
+                    <div class="row justify-content-center">
+                        <div class="">
+                            <h2>
+                                <a href="{{ path('accueil',{'year':Date.previousMonth().year(),'month':Date.previousMonth().month(),"agendaSpe":agendaSpe}) }}"><i id="agendaPrev" class="far fa-arrow-alt-circle-left switch_calendrier"></i></a>
+                                    {{ Date.__toString() }}
+                                <a href="{{ path('accueil',{'year':Date.nextMonth().year(),'month':Date.nextMonth().month(),"agendaSpe":agendaSpe}) }}"><i id="agendaSuiv" class="far fa-arrow-alt-circle-right switch_calendrier"></i></a>
+                            </h2>
+                        </div>
+                    </div>
+                {% endblock %}
+                {% block body %}
+                {% endblock %}
+        </div>
+        {% block include %}
+            {{ include('accueil/modalAddCalendrier.html.twig')  }}
+            {{ include('accueil/modalAddEvenement.html.twig')  }}
+            {{ include('accueil/modalUpdateUser.html.twig')  }}
+            {{ include('accueil/modalUpdateDeleteCalendrier.html.twig')  }}
+        {% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('Framework/bootstrap/js/popper.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('Framework/bootstrap/js/bootstrap.min.js') }}"></script>           
+            <script type="text/javascript" src="{{ asset('Framework/moment/min/moment-with-locales.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('Framework/moment/tempusdominus-bootstrap-4.min.js') }}"></script>
+            <script type="text/javascript" charset="utf8" src="{{ asset('Framework/fontawesome/js/fontawesome.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('Framework/webslide/static/js/webslides.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('Framework/webslide/static/js/svg-icons.js') }}"></script>
+            <script>
+                    $(function () {
+                        $('a').popover();
+                    });
+
+                    $(".dropright").hover(function () {
+                        var dropdownMenu = $(this).children(".dropdown-menu");
+                        dropdownMenu.toggle("fast", "linear");
+                    });
+
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker({
+                            locale: 'fr'
+                        });
+                    });
+
+                    $(function () {
+                        $('#datetimepicker2').datetimepicker({
+                            locale: 'fr'
+                        });
+                    });
+            </script>
+        {% endblock %}
+    </body>
+</html>

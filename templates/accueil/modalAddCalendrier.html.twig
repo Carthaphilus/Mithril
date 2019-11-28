@@ -1,0 +1,44 @@
+{# empty Twig template #}
+{{  form_start(formAgenda, {'action':path('ajoutAgenda'), 'method':'POST'}) }}
+<div class="modal fade" id="modalAddCalendrier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Nouveau Agenda</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-4">
+                    <label class="sr-only" for="nomAgenda">Nom</label>
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <i class="input-group-text fas fa-tag imodal"></i>
+                        </div>
+                        {{ form_widget(formAgenda.nom) }}
+                    </div>
+                </div>
+
+                <div class="md-form mb-4">
+                    <label class="sr-only" for="imgAgenda">Image</label>
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <i class="input-group-text fas fa-envelope-open-text imodal"></i>
+                        </div>
+                        <div class="custom-file">
+                            {{ form_widget(formAgenda.image) }}
+                            <label class="custom-file-label" for="customFile">Image</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                {{ form_widget(formAgenda.send) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ form_end(formAgenda) }}

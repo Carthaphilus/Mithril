@@ -1,0 +1,59 @@
+{# empty Twig template #}
+
+<div class="modal fade" id="modalUpdateUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Information Utilisateur</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('modifUser',{'id':user.id}) }}" method="POST">
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-4">
+                        <label class="sr-only" for="nomUser">Nom</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <i class="input-group-text fas fa-user-tag imodal"></i>
+                            </div>
+                            <input type="text" class="form-control" name="nomUser" placeholder="Nom" value="{{ user.nom }}">
+                        </div>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <label class="sr-only" for="dateNaissance">Date de Naissance</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <i class="input-group-text fas fa-birthday-cake imodal"></i>
+                            </div>
+                            <input type="date" class="form-control" name="dateNaissance" placeholder="Date de naissance" value="{{ user.datenaissance|date('Y-m-d') }}">
+                        </div>
+                    </div>
+                    <div class="md-form mb-4">
+                        <label class="sr-only" for="mailUser">Mail</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <i class=" input-group-text fas fa-envelope-open-text imodal"></i>
+                            </div>
+                            <input type="mail" class="form-control" name="mailUser" placeholder="E-mail" value="{{ user.mail }}">
+                        </div>
+                    </div>
+                    <div class="md-form mb-4">
+                        <label class="sr-only" for="mdp">Mot de passe</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <i class="input-group-text fas fa-key imodal"></i>
+                            </div>
+                            <input type="password" class="form-control" name="mdpUser" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="button-gradiant">Enregistrer <i class="fas fa-plus-circle"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
