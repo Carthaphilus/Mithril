@@ -35,7 +35,7 @@
                                 {% set agendaSpe = agenda %}
                             {% endif %}
                         {% endfor %}
-                        <div class="img" style="background-image:{{agenda.image}}"></div>
+                        <div class="img" style="background-image:{{asset('uploads/images/'~agendaSpe.image)}}"></div>
                         {% for day in Date.getJours %}
                             {% if (loop.index0 % 7) == 0 %}
                             <tr>
