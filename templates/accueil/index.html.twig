@@ -3,7 +3,6 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    {% dump(tabEvenement) %}
     <main role="main">
         <div class="row text-center">
             <table class="table">
@@ -27,7 +26,7 @@
                                     {% endfor %}
                                     {% for evenement in agendaSpe.getEvenement %}
                                         {% if Date.getJours[loop.index0+ index * 7] is defined %}
-                                            {% if Date.getJours[loop.index0+ index * 7]|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and  Date.getJours[loop.index0+ index * 7]|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
+                                            {% if Date.getJours[loop.index0+ index * 7]|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and  Date.getJours[key+ index * 7]|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
                                                 <div style="background: {{evenement.couleur}}">
                                                     {{ evenement.libelle }}
                                                 </div>
@@ -65,168 +64,78 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
+                                               {# {% for formEvent in tabEvenement %}
                                             <div class="modal-body mx-6">
-                                                {#{% if agendaSpe is not empty %}
-                                                    {% for key,agenda in tabEvenement %}
-                                                        {% if key|number_format == agendaSpe %}
-                                                            {% set formEventSpe = key %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                    {% for formEvent in formEventSpe %}
-                                                        {{  form_start(formEvent, {'action': path('modifEvenement',{'id':key}), 'method':'POST'}) }}
-                                                        <div class="modal-body mx-6">
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-calendar-check imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.agenda) }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-tag imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.libelle) }}
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                                                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                                                            <i class=" input-group-text fa fa-calendar imodal"></i>
-                                                                        </div>
-                                                                        <input type="text" class="form-control datetimepicker-input" name="evenement[dateDeb]" data-target="#datetimepicker1"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                                                            <i class=" input-group-text fa fa-calendar imodal"></i>
-                                                                        </div>
-                                                                        <input type="text" class="form-control datetimepicker-input" name="evenement[dateFin]" data-target="#datetimepicker2"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-sticky-note imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.note) }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-location-arrow imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.lieux) }}
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-palette imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.couleur) }}
-                                                                </div>
-                                                            </div>
+                                                
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-prepend">
+                                                            <i class="input-group-text fas fa-calendar-check imodal"></i>
                                                         </div>
-                                                        <div class="modal-footer d-flex justify-content-center">
-                                                            {{ form_widget(formEvent.send) }}
+                                                        {{ form_widget(formEvenement.agenda) }}
+                                                    </div>
+                                                </div>
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-prepend">
+                                                            <i class="input-group-text fas fa-tag imodal"></i>
                                                         </div>
-                                                        {{ form_end(formEvent) }}
-                                                    {% endfor %}
-                                                {% else %}
-                                                    {% for key,agenda in tabEvenement %}
-                                                        {% for k,formEvent in agenda %}
-                                                            {#<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                                {{ AllAgenda[index].getEvenement[k].libelle }}
-                                                            </a>
-                                                            {{  form_start(formEvent, {'action': path('modifEvenement',{'id':key}), 'method':'POST'}) }}
+                                                        {{ form_widget(formEvenement.libelle) }}
+                                                    </div>
+                                                </div>
 
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-calendar-check imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.agenda) }}
-                                                                </div>
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                                <i class=" input-group-text fa fa-calendar imodal"></i>
                                                             </div>
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-tag imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.libelle) }}
-                                                                </div>
-                                                            </div>
+                                                            <input type="text" class="form-control datetimepicker-input" name="evenement[dateDeb]" data-target="#datetimepicker1"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                                                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                                                            <i class=" input-group-text fa fa-calendar imodal"></i>
-                                                                        </div>
-                                                                        <input type="text" class="form-control datetimepicker-input" name="evenement[dateDeb]" data-target="#datetimepicker1"/>
-                                                                    </div>
-                                                                </div>
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                                                <i class=" input-group-text fa fa-calendar imodal"></i>
                                                             </div>
+                                                            <input type="text" class="form-control datetimepicker-input" name="evenement[dateFin]" data-target="#datetimepicker2"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                                                            <i class=" input-group-text fa fa-calendar imodal"></i>
-                                                                        </div>
-                                                                        <input type="text" class="form-control datetimepicker-input" name="evenement[dateFin]" data-target="#datetimepicker2"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-prepend">
+                                                            <i class="input-group-text fas fa-sticky-note imodal"></i>
+                                                        </div>
+                                                        {{ form_widget(formEvenement.note) }}
+                                                    </div>
+                                                </div>
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-prepend">
+                                                            <i class="input-group-text fas fa-location-arrow imodal"></i>
+                                                        </div>
+                                                        {{ form_widget(formEvenement.lieux) }}
+                                                    </div>
+                                                </div>
 
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-sticky-note imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.note) }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-location-arrow imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.lieux) }}
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="md-form mb-6">
-                                                                <div class="input-group mb-2 mr-sm-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <i class="input-group-text fas fa-palette imodal"></i>
-                                                                    </div>
-                                                                    {{ form_widget(formEvent.couleur) }}
-                                                                </div>
-                                                            </div>
-                                                            {{ form_widget(formEvent.send) }}
-                                                            {{ form_end(formEvent) }}
-                                                        {% endfor %}
-                                                    {% endfor %}
-                                                {% endif %}#}
+                                                <div class="md-form mb-6">
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-prepend">
+                                                            <i class="input-group-text fas fa-palette imodal"></i>
+                                                        </div>
+                                                        {{ form_widget(formEvenement.couleur) }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                                {{ form(tabEvenement[3][0]) }}
                                             <div class="modal-footer d-flex justify-content-center">
-
+                                                {{ form_widget(formEvenement.send) }}
                                             </div>
+                                            {% endfor %}#}
                                         </div>
                                     </div>
                                 </div>
