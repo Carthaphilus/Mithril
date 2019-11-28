@@ -217,6 +217,12 @@ i{
     padding-bottom: 0.75rem !important;
 }
 
+image{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
 
 /*.agenda{
     font-size: 10px;
