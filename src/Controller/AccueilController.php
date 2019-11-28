@@ -247,6 +247,8 @@ class AccueilController extends Controller {
         $Agenda = new Agenda();
         $formAgenda = $this->createForm(AgendaType::class, $Agenda);
         $formAgenda->handleRequest($request);
+        
+        /** fgdfhdghdgfdhdgd */
 
         if ($formAgenda->isSubmitted() && $formAgenda->isValid()) {
 
