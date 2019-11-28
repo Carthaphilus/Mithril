@@ -36,41 +36,38 @@
 
                 <div id="openSolo">
                     {% for agenda in AllAgenda %}
-                    <form action="{{ path('droitAgenda', {'id':agenda.id}) }}" method="POST">
-                        <div class="collapse" id="collapseDroitAgenda{{ loop.index }}" data-parent="#openSolo">
-                            <table class="table table_initial">
-                                <tr>
-                                    <th>Personne Partagee</th>
-                                    <th>Droit</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <div class="input-group mb-2 mr-sm-2">
-                                <input list="userDroit" class="form-control" name="userDroit" type="text" id="addUSer" placeholder="Qui a acces a cette agenda ?">
-                                <datalist id="userDroit">
-                                    {% for user in AllUsers %}
-                                        <option data-value="{{ user.mail }}" value="{{ user.id }}">
-                                    {% endfor %}
-                                </datalist>
-                            </div>
-                            <div class="input-group mb-2 mr-sm-2">
-                                <div class="custom-file">
+                        <form action="{{ path('droitAgenda', {'id':agenda.id}) }}" method="POST">
+                            <div class="collapse" id="collapseDroitAgenda{{ loop.index }}" data-parent="#openSolo">
+                                <table class="table table_initial">
+                                    <tr>
+                                        <th>Personne Partagee</th>
+                                        <th>Droit</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <select id="userDroit" class="form-control" name="userDroit" placeholder="Qui a acces a cette agenda ?">
+                                        {% for user in AllUsers %}
+                                            <option value="{{ user.id }}">{{ user.mail }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="input-group mb-2 mr-sm-2">
                                     <select class="form-control" id="acces" name="acces" placeholder="Quel type d'acce lui accordé vous ?">
                                         <option value="0">Lecture</option>
                                         <option value="1">Lecture|Ecriture|</option>
                                     </select>
                                 </div>
+                                <center>
+                                    <button type="submit" class="button-gradiant">Ajouter <i class="fas fa-plus-circle"></i></button>
+                                </center>
                             </div>
-                            <center>
-                                <button type="submit" class="button-gradiant">Ajouter <i class="fas fa-plus-circle"></i></button>
-                            </center>
-                        </div>
-                    </form>
+                        </form>
                     {% endfor %}
                     <br>
                     {% for formAgenda in tabAgenda %}

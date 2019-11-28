@@ -65,17 +65,19 @@
                         {% endfor %}
                 </tr>
                 <tr>
-                {% set oldevent = "" %}
-                {% for day in Date.getJours %}                        
-                    {% for agenda in AllAgenda %}
-                        {% for evenement in agenda.getEvenement %}
-                            {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
-                                {% if oldevent != evenement.id%}
+                    {% set oldevent = "" %}
+                    {% for day in Date.getJours %}                        
+                        {% for agenda in AllAgenda %}
+                            {% for evenement in agenda.getEvenement %}
+                                {% if day|date('Y-m-d') >= evenement.dateDeb|date('Y-m-d') and day|date('Y-m-d') <= evenement.dateFin|date('Y-m-d') %}
+                                    {% if oldevent != evenement.libelle %}
                                     <tr>
                                     {% endif %}
                                     <td style="background: {{evenement.couleur}}">{{evenement.libelle}}</td>
-                                    {% set oldevent = evenement.id %}
+                                {% else %}
+                                    <td></td>
                                 {% endif %}
+                                {% set oldevent = evenement.libelle %}
                             {% endfor %}
                         {% endfor %}
                     {% endfor %}
