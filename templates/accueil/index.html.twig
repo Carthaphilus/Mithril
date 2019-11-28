@@ -6,7 +6,7 @@
     <main role="main">
         <div class="row text-center">
             <table class="table">
-                                {% if agendaSpe is empty %}
+                {% if agendaSpe is empty %}
                     {% for day in Date.getJours %}
                         {% if (loop.index0 % 7) == 0 %}
                             <tr>
