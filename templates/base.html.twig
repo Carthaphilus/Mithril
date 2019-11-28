@@ -96,6 +96,16 @@
                                         </a>
                                     </li>
                                     <div class="dropdown-divider"></div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#modalUpdateDeleteEvent" data-toggle="modal" 
+                                           data-toggle="popover" data-trigger="hover" data-content="Gestion des evenements">
+                                            <div class="logo_superpose">
+                                                <i class="second calendar-event fas fa-calendar"></i>
+                                                <i class="first star fas fa-star"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
                                     <div id="nav-end">                                       
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ path("app_logout") }}" data-toggle="popover" data-trigger="hover" data-content="Deconnexion">
@@ -139,6 +149,7 @@
             {{ include('accueil/modalAddEvenement.html.twig')  }}
             {{ include('accueil/modalUpdateUser.html.twig')  }}
             {{ include('accueil/modalUpdateDeleteCalendrier.html.twig')  }}
+            {{ include('accueil/modalUpdateDeleteEvenement.html.twig')  }}
         {% endblock %}
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>

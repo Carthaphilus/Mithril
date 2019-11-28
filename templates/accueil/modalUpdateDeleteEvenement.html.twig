@@ -1,0 +1,112 @@
+{# empty Twig template #}
+
+<div class="modal fade" id="modalUpdateDeleteEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">
+                    Modifier les evenements
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-6">
+                <div class="accordion" id="afficheSoloEvent">
+                    {% for key,agenda in tabEvenement %}
+                        {% set index = loop.index0 %}
+                        {% for k,formEvent in agenda %}
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <a class="bouton-gradiant " data-toggle="collapse" href="#coollapseEvent{{ k }}Agenda{{key}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                {{ AllAgenda[index].getEvenement[k].libelle }}
+                                            </a>
+                                        </div>
+                                        <div class="col-2">
+                                            <a href="{{ path('deleteEvenement',{'id':AllAgenda[index].getEvenement[k].id}) }}"><i class="fas fa-minus-circle"></i></a>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <div class="collapse text-center" id="coollapseEvent{{ k }}Agenda{{key}}" data-parent="#afficheSoloEvent">
+                                        {{  form_start(formEvent, {'action': path('modifEvenement', {'id': key}), 'method': 'POST'})}}
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group-prepend">
+                                                    <i class="input-group-text fas fa-calendar-check imodal"></i>
+                                                </div>
+                                                {{ form_widget(formEvent.agenda)}}
+                                            </div>
+                                        </div>
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group-prepend">
+                                                    <i class="input-group-text fas fa-tag imodal"></i>
+                                                </div>
+                                                {{ form_widget(formEvent.libelle)}}
+                                            </div>
+                                        </div>
+
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group date" id="" data-target-input="nearest">
+                                                    <div class="input-group-append" data-target="" data-toggle="">
+                                                        <i class=" input-group-text fa fa-calendar imodal"></i>
+                                                    </div>
+                                                    <input type="datetime" class="form-control datetimepicker-input" value="{{ AllAgenda[index].getEvenement[k].dateDeb|date('Y-m-n H:i') }}" name="evenement[dateDeb]" data-target="#datetimepicker1"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group date" id="" data-target-input="nearest">
+                                                    <div class="input-group-append" data-target="" data-toggle="">
+                                                        <i class=" input-group-text fa fa-calendar imodal"></i>
+                                                    </div>
+                                                    <input type="datetime" class="form-control datetimepicker-input" value="{{ AllAgenda[index].getEvenement[k].dateFin|date('Y-m-n H:i') }}" name="evenement[dateFin]" data-target="#datetimepicker2"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group-prepend">
+                                                    <i class="input-group-text fas fa-sticky-note imodal"></i>
+                                                </div>
+                                                {{ form_widget(formEvent.note)}}
+                                            </div>
+                                        </div>
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group-prepend">
+                                                    <i class="input-group-text fas fa-location-arrow imodal"></i>
+                                                </div>
+                                                {{ form_widget(formEvent.lieux)}}
+                                            </div>
+                                        </div>
+
+                                        <div class="md-form mb-6">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <div class="input-group-prepend">
+                                                    <i class="input-group-text fas fa-palette imodal"></i>
+                                                </div>
+                                                {{ form_widget(formEvent.couleur)}}
+                                            </div>
+                                        </div>
+                                        {{ form_widget(formEvent.send)}}
+                                        {{ form_end(formEvent)}}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
