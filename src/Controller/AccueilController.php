@@ -83,6 +83,10 @@ class AccueilController extends Controller {
 
         dump($tabAgenda);
 
+        $query4 = $bdd->createQuery('SELECT a FROM App\Entity\Acces a WHERE a.User=:user');
+        $query4->setParameter('user', $user);
+        $AllAccesUser = $query3->getResult();
+
         $date = new DateClass($month ?? date('m'), $year ?? date('Y'));
         $formAgenda = $this->createForm(AgendaType::class);
         $formEvenement = $this->createForm(EvenementType::class);
@@ -96,8 +100,9 @@ class AccueilController extends Controller {
                     'user' => $user,
                     'agendaSpe' => $agendaSpe,
                     'tabEvenement' => $tabEvenement,
-                    'modeAffichage'=>$modeAffich,
-                    'tabAccesAgenda'=>$tabAccesAgenda,
+                    'modeAffichage' => $modeAffich,
+                    'tabAccesAgenda' => $tabAccesAgenda,
+                    'AllAccesUser'=>$AllAccesUser,
         ]);
     }
 
@@ -184,12 +189,12 @@ class AccueilController extends Controller {
         $query3 = $bdd->createQuery('SELECT a FROM App\Entity\Acces a WHERE a.Agenda=:agenda');
         $query3->setParameter('agenda', $Agenda);
         $AllAccesAgenda = $query3->getResult();
-        
-        foreach($AllAccesAgenda as $unAcces){
+
+        foreach ($AllAccesAgenda as $unAcces) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($unAcces);
         }
-        
+
         $bdd->remove($Agenda);
         $bdd->flush();
         return $this->redirectToRoute('accueil');
@@ -249,13 +254,12 @@ class AccueilController extends Controller {
         $Agenda = new Agenda();
         $formAgenda = $this->createForm(AgendaType::class, $Agenda);
         $formAgenda->handleRequest($request);
-        
-        /** fgdfhdghdgfdhdgd */
 
+        /** fgdfhdghdgfdhdgd */
         if ($formAgenda->isSubmitted() && $formAgenda->isValid()) {
 
             $agenda = $formAgenda->getData();
-            
+
             $file = $formAgenda['image']->getData();
             if ($file) {
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -317,10 +321,15 @@ class AccueilController extends Controller {
         }
         return $this->redirectToRoute('accueil');
     }
-    
-    
-    public function deleteAccesUserAction(){
-        
+
+    /**
+     * @Route("/Delete/Acces/User/{id}",name="deleteAccesUser")
+     */
+    public function deleteAccesUserAction(Acces $acces) {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($acces);
+        $em->flush();
+        return $this->redirectToRoute('accueil');
     }
 
 }
