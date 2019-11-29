@@ -97,6 +97,7 @@ class AccueilController extends Controller {
                     'agendaSpe' => $agendaSpe,
                     'tabEvenement' => $tabEvenement,
                     'modeAffichage'=>$modeAffich,
+                    'tabAccesAgenda'=>$tabAccesAgenda,
         ]);
     }
 
