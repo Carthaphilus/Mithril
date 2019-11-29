@@ -21,9 +21,9 @@ use function dump;
 class AccueilController extends Controller {
 
     /**
-     * @Route("/Accueil/{year}/{month}/{agendaSpe}", name="accueil", defaults={"agendaSpe"=null, "year"=null, "month"=null})
+     * @Route("/Accueil/{year}/{month}/{modeAffich}/{agendaSpe}", name="accueil", defaults={"agendaSpe"=null, "year"=null, "month"=null, "modeAffich"=0})
      */
-    public function index(Request $request, AgendaRepository $repositoryAgenda, EvenementRepository $repositoryEvenement, $agendaSpe, $year, $month) {
+    public function index(Request $request, AgendaRepository $repositoryAgenda, EvenementRepository $repositoryEvenement, $agendaSpe, $year, $month, $modeAffich) {
 
         $bdd = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -96,6 +96,7 @@ class AccueilController extends Controller {
                     'user' => $user,
                     'agendaSpe' => $agendaSpe,
                     'tabEvenement' => $tabEvenement,
+                    'modeAffichage'=>$modeAffich,
         ]);
     }
 
