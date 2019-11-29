@@ -45,9 +45,17 @@
                                         <th>Action</th>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        {% for tabAcces in tabAccesAgenda %}
+                                            {% for Acces in tabAcces %}
+                                                <td>{{ Acces.getUser().mail }}</td>
+                                                {% if Acces.getDroit() == 0 %}
+                                                    <td>Lecture</td>
+                                                {% else %}
+                                                    <td>Lecture|Ecriture</td>
+                                                {% endif %}
+                                                <td><a href="{{ path("deleteAccesUser",{"id":Acces.id}) }}"><i class="fas fa-minus-circle"></i></a></td>
+                                            {% endfor %}
+                                        {% endfor %}
                                     </tr>
                                 </table>
                                 <div class="input-group mb-2 mr-sm-2">
@@ -60,7 +68,7 @@
                                 <div class="input-group mb-2 mr-sm-2">
                                     <select class="form-control" id="acces" name="acces" placeholder="Quel type d'acce lui accordé vous ?">
                                         <option value="0">Lecture</option>
-                                        <option value="1">Lecture|Ecriture|</option>
+                                        <option value="1">Lecture|Ecriture</option>
                                     </select>
                                 </div>
                                 <center>

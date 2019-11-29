@@ -317,5 +317,10 @@ class AccueilController extends Controller {
         }
         return $this->redirectToRoute('accueil');
     }
+    
+    
+    public function deleteAccesUserAction(){
+        
+    }
 
 }
