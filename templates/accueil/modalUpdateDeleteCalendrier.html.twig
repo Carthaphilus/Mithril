@@ -44,19 +44,23 @@
                                         <th>Droit</th>
                                         <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        {% for tabAcces in tabAccesAgenda %}
+
+                                    {% for idAgenda,tabAcces in tabAccesAgenda %}
+                                        {% if idAgenda == agenda.id %}
                                             {% for Acces in tabAcces %}
-                                                <td>{{ Acces.getUser().mail }}</td>
-                                                {% if Acces.getDroit() == 0 %}
-                                                    <td>Lecture</td>
-                                                {% else %}
-                                                    <td>Lecture|Ecriture</td>
-                                                {% endif %}
-                                                <td><a href="{{ path("deleteAccesUser",{"id":Acces.id}) }}"><i class="fas fa-minus-circle"></i></a></td>
+                                                <tr>
+                                                    <td>{{ Acces.getUser().mail }}</td>
+                                                    {% if Acces.getDroit() == 0 %}
+                                                        <td>Lecture</td>
+                                                    {% else %}
+                                                        <td>Lecture|Ecriture</td>
+                                                    {% endif %}
+                                                    <td><a href="{{ path("deleteAccesUser",{"id":Acces.id}) }}"><i class="fas fa-minus-circle"></i></a></td>
+                                                </tr>    
                                             {% endfor %}
-                                        {% endfor %}
-                                    </tr>
+                                        {% endif %}
+                                    {% endfor %}
+
                                 </table>
                                 <div class="input-group mb-2 mr-sm-2">
                                     <select id="userDroit" class="form-control" name="userDroit" placeholder="Qui a acces a cette agenda ?">
