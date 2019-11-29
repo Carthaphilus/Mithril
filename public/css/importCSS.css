@@ -34,11 +34,11 @@ and open the template in the editor.
 }*/
 
 .connexion_enregistrement{
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 #logo_connexion{
-    background: linear-gradient(-45deg, #C33764, #1D2671);
+    background: white;
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -47,6 +47,10 @@ and open the template in the editor.
     font-size: 100px;
     font-weight: bold;
     position: relative;
+}
+
+.text_connexion{
+    color: white;
 }
 
 #logo{

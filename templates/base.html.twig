@@ -38,8 +38,8 @@
                                             <i class="fas fa-tv"></i>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownDisplay">
-                                            <a class="dropdown-item" href="#">Chaque Mois</a>
-                                            <a class="dropdown-item" href="#">Affichage en Gantt</a>
+                                            <a class="dropdown-item" href="{{ path("accueil",{'year':Date.year,'month':Date.month,"modeAffich":0,"agendaSpe":agendaSpe}) }}">Chaque Mois</a>
+                                            <a class="dropdown-item" href="{{ path("accueil",{'year':Date.year,'month':Date.month,"modeAffich":1,"agendaSpe":agendaSpe}) }}">Affichage en Gantt</a>
                                         </div>
                                     </li>
 
@@ -65,11 +65,11 @@
                                             </a>
                                         </li>
                                         {% for agenda in AllAgenda %}
-                                        <li class="nav-item text-center">
-                                            <a class="nav-link" href="{{ path("accueil",{'year':Date.year,'month':Date.month,"agendaSpe":agenda.id}) }}" data-toggle="popover" data-trigger="hover" data-content="{{ agenda.nom }}">
-                                                <i class="first far fa-calendar-alt"></i>
-                                            </a>
-                                        </li>
+                                            <li class="nav-item text-center">
+                                                <a class="nav-link" href="{{ path("accueil",{'year':Date.year,'month':Date.month,"modeAffich":0,"agendaSpe":agenda.id}) }}" data-toggle="popover" data-trigger="hover" data-content="{{ agenda.nom }}">
+                                                    <i class="first far fa-calendar-alt"></i>
+                                                </a>
+                                            </li>
                                         {% endfor %}
                                         <li class="nav-item">
                                             <a class="nav-link" href="#modalUpdateDeleteCalendrier" data-toggle="modal"
@@ -131,19 +131,27 @@
                     </div>
                 </header>
             {%  endblock %}
-                {% block date %}
-                    <div class="row justify-content-center">
-                        <div class="">
+            {% block date %}
+                <div class="row justify-content-center">
+                    <div class="">
+                        {% if modeAffichage == 0 %}
                             <h2>
-                                <a href="{{ path('accueil',{'year':Date.previousMonth().year(),'month':Date.previousMonth().month(),"agendaSpe":agendaSpe}) }}"><i id="agendaPrev" class="far fa-arrow-alt-circle-left switch_calendrier"></i></a>
+                                <a href="{{ path('accueil',{'year':Date.previousMonth().year(),'month':Date.previousMonth().month(),"modeAffich":0,"agendaSpe":agendaSpe}) }}"><i id="agendaPrev" class="far fa-arrow-alt-circle-left switch_calendrier"></i></a>
                                     {{ Date.__toString() }}
-                                <a href="{{ path('accueil',{'year':Date.nextMonth().year(),'month':Date.nextMonth().month(),"agendaSpe":agendaSpe}) }}"><i id="agendaSuiv" class="far fa-arrow-alt-circle-right switch_calendrier"></i></a>
+                                <a href="{{ path('accueil',{'year':Date.nextMonth().year(),'month':Date.nextMonth().month(),"modeAffich":0,"agendaSpe":agendaSpe}) }}"><i id="agendaSuiv" class="far fa-arrow-alt-circle-right switch_calendrier"></i></a>
                             </h2>
-                        </div>
+                        {% else %}
+                            <h2>
+                                <a href="{{ path('accueil',{'year':Date.previousMonth().year(),'month':Date.previousMonth().month(),"modeAffich":1,"agendaSpe":agendaSpe}) }}"><i id="agendaPrev" class="far fa-arrow-alt-circle-left switch_calendrier"></i></a>
+                                    {{ Date.__toString() }}
+                                <a href="{{ path('accueil',{'year':Date.nextMonth().year(),'month':Date.nextMonth().month(),"modeAffich":1,"agendaSpe":agendaSpe}) }}"><i id="agendaSuiv" class="far fa-arrow-alt-circle-right switch_calendrier"></i></a>
+                            </h2>
+                        {% endif %}
                     </div>
-                {% endblock %}
-                {% block body %}
-                {% endblock %}
+                </div>
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
         </div>
         {% block include %}
             {{ include('accueil/modalAddCalendrier.html.twig')  }}
@@ -162,26 +170,26 @@
             <script type="text/javascript" src="{{ asset('Framework/webslide/static/js/webslides.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('Framework/webslide/static/js/svg-icons.js') }}"></script>
             <script>
-                    $(function () {
-                        $('a').popover();
-                    });
+                $(function () {
+                    $('a').popover();
+                });
 
-                    $(".dropright").hover(function () {
-                        var dropdownMenu = $(this).children(".dropdown-menu");
-                        dropdownMenu.toggle("fast", "linear");
-                    });
+                $(".dropright").hover(function () {
+                    var dropdownMenu = $(this).children(".dropdown-menu");
+                    dropdownMenu.toggle("fast", "linear");
+                });
 
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker({
-                            locale: 'fr'
-                        });
+                $(function () {
+                    $('#datetimepicker1').datetimepicker({
+                        locale: 'fr'
                     });
+                });
 
-                    $(function () {
-                        $('#datetimepicker2').datetimepicker({
-                            locale: 'fr'
-                        });
+                $(function () {
+                    $('#datetimepicker2').datetimepicker({
+                        locale: 'fr'
                     });
+                });
             </script>
         {% endblock %}
     </body>
