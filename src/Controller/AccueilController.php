@@ -85,7 +85,7 @@ class AccueilController extends Controller {
 
         $query4 = $bdd->createQuery('SELECT a FROM App\Entity\Acces a WHERE a.User=:user');
         $query4->setParameter('user', $user);
-        $AllAccesUser = $query3->getResult();
+        $AllAccesUser = $query4->getResult();
 
         $date = new DateClass($month ?? date('m'), $year ?? date('Y'));
         $formAgenda = $this->createForm(AgendaType::class);
